@@ -1,0 +1,25 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: consumer-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+#Ribbon负载均衡改为随机，默认是轮询，平常用轮询就可以
+user-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#Hystrix服务超时时间设置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+#feign开启熔断
+feign:
+  hystrix:
+    enabled: true
